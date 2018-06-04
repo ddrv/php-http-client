@@ -8,6 +8,7 @@ use Ddrv\Http\Client\Request\FormRequest;
 use Ddrv\Http\Client\Request\GetRequest;
 use Ddrv\Http\Client\Request\HeadRequest;
 use Ddrv\Http\Client\Request\OptionsRequest;
+use Ddrv\Http\Client\Request\PatchRequest;
 use Ddrv\Http\Client\Request\PostRequest;
 use Ddrv\Http\Client\Request\PutRequest;
 use Ddrv\Http\Client\Request\Request;
@@ -89,6 +90,14 @@ class Client
     {
         $uri = $this->createUri($uri);
         $request = new OptionsRequest($uri);
+        $request = $this->sets($request);
+        return $request;
+    }
+
+    public function patch($uri)
+    {
+        $uri = $this->createUri($uri);
+        $request = new PatchRequest($uri);
         $request = $this->sets($request);
         return $request;
     }
