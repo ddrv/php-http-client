@@ -136,7 +136,7 @@ class Client
 
     protected function createUri($uri)
     {
-        return $uri;
+        return $this->baseUri.$uri;
     }
 
     protected function sets(Request $request)

@@ -1,6 +1,6 @@
 {
   "name": "ddrv/http-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "library",
   "description": "simple HTTP client without cURL dependency",
   "keywords": ["http", "client", "http-client", "without-curl"],
