@@ -14,7 +14,7 @@ class Response
 
     public function __construct($headers, $body)
     {
-        foreach ($headers as $header) {
+        foreach ((array)$headers as $header) {
             if (preg_match('#HTTP/(?<v>[0-9\.]+)\s+(?<s>[0-9]+)(\s+(?<p>.*))?#', $header, $out)) {
                 $out = array_replace(array('v' => true, 's' => true, 'p' => true), $out);
                 $this->statusCode = $out['s'];
