@@ -130,14 +130,8 @@ class Client implements ClientInterface
             if ($port && $port !== '443') {
                 $host .= ':' . $port;
             }
-            $path = '/' . ltrim($uri->getPath(), '/');
             if (array_key_exists($host, $this->ssl)) {
-                foreach ($this->ssl[$host] as $p => $options) {
-                    if (mb_strpos($path, $p) !== 0) {
-                        continue;
-                    }
-                    $ssl = array_replace($ssl, $options);
-                }
+                $ssl = array_replace($ssl, $this->ssl[$host]);
             }
             $context['ssl'] = $ssl;
         }
@@ -161,6 +155,12 @@ class Client implements ClientInterface
      */
     public function setSslAuth(string $host, string $cert, string $key, string $password = null): self
     {
+        list ($h, $p) = explode(':', $host . ':');
+        $p = (int)$p;
+        if (!$p) {
+            $p = 443;
+        }
+        $host = $h . ':' . $p;
         $this->ssl[$host]['local_cert'] = $cert;
         $this->ssl[$host]['local_pk'] = $key;
         if ($password) {
