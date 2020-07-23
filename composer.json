@@ -30,13 +30,16 @@
   "suggest": {
     "psr/http-message-implementation": "Choice your favorite psr-7 implementation",
     "psr/http-factory-implementation": "Choice factory for your psr-7 objects",
-    "ddrv/http-client-wrapper-log": "Wrapper for logging"
+    "webclient/ext-cache": "Wrapper for caching results",
+    "webclient/ext-cookie": "Wrapper for cookies",
+    "webclient/ext-log": "Wrapper for logging",
+    "webclient/ext-protocol-version": "Wrapper for auto change protocol version",
+    "webclient/helper-form": "Easy creating PSR-7 requests"
   },
   "autoload": {
     "psr-4": {
       "Ddrv\\Http\\Client\\": "src/"
-    },
-    "files": ["src/filter.php"]
+    }
   },
   "autoload-dev": {
     "psr-4": {

@@ -15,8 +15,6 @@ Install this package, your favorite [psr-7 implementation](https://packagist.org
 composer require ddrv/http-client:^2.0
 ```
 
-
-
 # Using
 
 ```php
@@ -26,8 +24,12 @@ use Ddrv\Http\Client\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 
-/** @var ResponseFactoryInterface $responseFactory */
-$http = new Client($responseFactory);
+/** 
+ * @var ResponseFactoryInterface $responseFactory
+ * @var int $timeout = 60
+ * @var int $redirects = 0
+ */
+$http = new Client($responseFactory, $timeout, $redirects);
 
 /** @var RequestInterface $request */
 $response = $http->sendRequest($request);
@@ -37,26 +39,7 @@ $phrase = $response->getReasonPhrase();
 $headers = $response->getHeaders();
 $someHeader = $response->getHeader('Content-Type');
 
-$body = $response->getBody()->getContents();
-```
-
-# Cookies
-
-If you need your own cookies manager, implements `\Ddrv\Http\Client\Cookie\Manager` interface.
-
-```php
-<?php
-
-use Ddrv\Http\Client\Client;
-use Ddrv\Http\Client\Cookie\Manager;
-use Psr\Http\Message\ResponseFactoryInterface;
-
-/**
- * @var ResponseFactoryInterface $responseFactory
- * @var Manager $cookiesManager
- */
-
-$http = new Client($responseFactory, $cookiesManager);
+$body = $response->getBody()->__toString();
 ```
 
 # Configuration
@@ -74,8 +57,10 @@ use Psr\Http\Message\UriInterface;
  */
 
 $http = new Client($responseFactory);
+
 $http->setFollowRedirects(0); // Set 0 follow redirects (disable). 
 $http->setTimeOut(10); // Set connection timeout 10 seconds
+
 $http->setProxy($proxy); // Set proxy
 $http->setProxy(); // Unset proxy
 ```
@@ -94,7 +79,8 @@ use Psr\Http\Message\ResponseFactoryInterface;
 
 $http = new Client($responseFactory);
 
-$http->setSslAuth('ssl.crt', 'ssl.key'); // without password
-$http->setSslAuth('ssl.crt', 'ssl.key', 'p@s$w0rd'); // with password
-$http->unsetSslAuth(); // disable
+$http->setSslAuth('host', 'ssl.crt', 'ssl.key'); // without password
+$http->setSslAuth('host', 'ssl.crt', 'ssl.key', 'p@s$w0rd'); // with password
+$http->unsetSslAuth('host'); // disable
 ```
+
