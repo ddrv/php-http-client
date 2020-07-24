@@ -1,3 +1,8 @@
+[![Latest Stable Version](https://img.shields.io/packagist/v/ddrv/http-client.svg?style=flat-square)](https://packagist.org/packages/ddrv/http-client)
+[![Total Downloads](https://img.shields.io/packagist/dt/ddrv/http-client.svg?style=flat-square)](https://packagist.org/packages/ddrv/http-client/stats)
+[![License](https://img.shields.io/packagist/l/ddrv/http-client.svg?style=flat-square)](https://github.com/ddrv/php-http-client/blob/master/LICENSE)
+[![PHP](https://img.shields.io/packagist/php-v/ddrv/http-client.svg?style=flat-square)](https://php.net)
+
 # ddrv/http-client
 
 Simple HTTP client without cURL dependency. Required `allow_url_fopen` option in `php.ini` file. 
