@@ -108,7 +108,7 @@ class Client implements ClientInterface
             'http' => [
                 'ignore_errors' => true,
                 'method' => $request->getMethod(),
-                'header' => implode($headers, "\r\n"),
+                'header' => implode("\r\n", $headers),
                 'protocol_version' => $request->getProtocolVersion(),
                 'timeout' => $this->timeout,
                 'follow_location' => $this->redirects > 0 ? 1 : 0,
