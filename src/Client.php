@@ -26,7 +26,7 @@ use function trim;
 class Client implements ClientInterface
 {
 
-    const VERSION = '2.0.0';
+    const VERSION = '2.0.1';
 
     /**
      * @var int
