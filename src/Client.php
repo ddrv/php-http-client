@@ -108,7 +108,6 @@ class Client implements ClientInterface
             'http' => [
                 'ignore_errors' => true,
                 'method' => $request->getMethod(),
-                'header' => implode("\r\n", $headers),
                 'protocol_version' => $request->getProtocolVersion(),
                 'timeout' => $this->timeout,
                 'follow_location' => $this->redirects > 0 ? 1 : 0,
@@ -118,8 +117,17 @@ class Client implements ClientInterface
         ];
 
         if ($this->proxy) {
-            $context['http']['proxy'] = $this->proxy->__toString();
+            $proxy = $this->proxy;
+            $user = $proxy->getUserInfo();
+            if ($user) {
+                $headers[] = 'Proxy-Authorization: Basic ' . base64_encode($user);
+                $proxy = $proxy->withUserInfo('');
+            }
+            $context['http']['request_fulluri'] = true;
+            $context['http']['proxy'] = $proxy->withUserInfo('')->__toString();
         }
+
+        $context['http']['header'] = implode("\r\n", $headers);
 
         if ($uri->getScheme() === 'https') {
             $ssl = [
